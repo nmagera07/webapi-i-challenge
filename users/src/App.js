@@ -29,15 +29,28 @@ function App() {
       })
   }
 
+  const deleteUser = id => {
+    axios 
+      .delete(`http://localhost:8001/users/${id}`)
+      .then(response => {
+        console.log(response)
+        setData(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   return (
     <div className="App">
       {data.map((user, index) => {
         return <Card key={index}>
           <p>{user.name}</p>
           <p>{user.bio}</p>
+          <button onClick={() => deleteUser(user.id)}>Delete</button>
         </Card>
       })}
-      <Users addUser={addUser}/>
+      <Users addUser={addUser} />
     </div>
   );
 }

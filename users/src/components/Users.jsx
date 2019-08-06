@@ -3,23 +3,31 @@ import { Form, Button } from 'semantic-ui-react'
 
 const Users = (props) => {
     const [formInput, setFormInput] = useState({
-        name: '',
-        bio: ''
+        user: {
+            name: '',
+            bio: ''
+        }
     })
 
     const changeHandler = e => {
         
         setFormInput({
-            [e.target.name]: e.target.value
+                user: {
+                    ...formInput.user,
+                    [e.target.name]: e.target.value
+                }
+            
         })
     }
 
     const addUser = e => {
         e.preventDefault()
-        props.addUser(formInput)
+        props.addUser(formInput.user)
         setFormInput({
-            name: '',
-            bio: ''
+            user: {
+                name: '',
+                bio: ''
+            }
         })
     }
 
